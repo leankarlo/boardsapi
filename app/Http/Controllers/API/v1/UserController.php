@@ -37,6 +37,7 @@ class UserController extends Controller
 
     protected function login(Request $request)
     {
+        
         //INITIALIZATION
         $input = $request->all();
         

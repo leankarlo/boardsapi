@@ -34,11 +34,13 @@ Route::get('/testconnection', 'API\v1\APIRequestController@TestConnection');
 
 
 /* USERS */
-	Route::get('/users/showall', 'API\v1\UserController@showAll');
-
-	Route::post('/users/login', 'API\v1\UserController@login');
-
-	Route::get('/users/logout', 'API\v1\UserController@logout');
+	Route::group(array('prefix'=>'users'), function(){
+		Route::get('showall', 'API\v1\UserController@showAll');
+	
+		Route::post('login', 'API\v1\UserController@login');
+	
+		Route::get('logout', 'API\v1\UserController@logout');
+	});
 /* END USERS */
 
 /* PRODUCTS */
