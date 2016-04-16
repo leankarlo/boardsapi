@@ -33,8 +33,8 @@ class UserController extends Controller
 
         $users = User::all();
         $returnArray = array('result' => true);
-        $returnArray = array_add($returnArray, 'users' , $users);
-        return Response::json(array('data' => $returnArray ) );
+        $returnArray = array_add($returnArray, 'data' , $users);
+        return Response::json($returnArray );
     }
 
     protected function login(Request $request)
@@ -56,13 +56,11 @@ class UserController extends Controller
         if (Auth::attempt($userdata) == true) 
         {
             $user = User::find(Auth::user()->id)->first();
-            $user = array_add($user, 'result' , true);
-            $user = array_add($user, 'message' , 'succesfully signed in');
-            return Response::json(array('data' => $user ) );
+            return Response::json(array('result' => true, 'data' => $user, 'message' => 'succesfully signed in' ) );
         }
         else{
             Auth::logout();
-            return Response::json(array('data' => array('result' => false ,'message' => 'incorrect email / password' )) );
+            return Response::json(array('result' => false ,'message' => 'incorrect email / password' ) );
         }
 
     }
@@ -83,7 +81,7 @@ class UserController extends Controller
         $user->user_type   = $accessType;   
         $user->save();
 
-        return Response::json(array('data' => array('result' => false ,'message' => 'User Succesfully Saved!' )) );
+        return Response::json(array('result' => true ,'message' => 'User Succesfully Saved!' ) );
 
     }
 
@@ -104,9 +102,9 @@ class UserController extends Controller
             $user->user_type   = $accessType;   
             $user->save();
 
-            return Response::json(array('data' => array('result' => true ,'message' => 'User Succesfully Saved!' )) );
+            return Response::json(array('result' => true ,'message' => 'User Succesfully Saved!' ) );
         } catch (Exception $e) {
-            return Response::json(array('data' => array('result' => false ,'message' => 'Error Saving User! Contact System Admin' )) );
+            return Response::json(array('result' => false ,'message' => 'Error Saving User! Contact System Admin' ) );
         }
         
     }
@@ -118,7 +116,7 @@ class UserController extends Controller
 
         try {
             $user->delete();
-            return Response::json(array('data' => array('result' => true ,'message' => 'User Succesfully Deleted!' )) );
+            return Response::json( array('result' => true ,'message' => 'User Succesfully Deleted!' ) );
 
         } catch (Exception $e) {
             

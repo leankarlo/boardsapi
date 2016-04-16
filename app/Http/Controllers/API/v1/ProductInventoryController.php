@@ -38,8 +38,8 @@ class ProductInventoryController extends Controller
                      ->get();
         // $productInventory = array_add(array('products' => $result), 'result' , true);
         $productInventory = array('result' => true);
-        $productInventory = array_add($productInventory, 'products' , $result);
-        return Response::json(array('data' => $productInventory ) );
+        $productInventory = array_add($productInventory, 'data' , $result);
+        return Response::json( $productInventory  );
     }
 
 
