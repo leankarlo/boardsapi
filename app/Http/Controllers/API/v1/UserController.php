@@ -30,7 +30,7 @@ class UserController extends Controller
     // USER DISPLAYS
     protected function showAll()
     {
-        return Response::json(array('data' => array('result' => true,'message' => 'API Connection Succesfull') ) );
+        
         $users = User::all()->first();
         $users = array_add($users, 'result' , true);
         return Response::json(array('data' => $users ) );
