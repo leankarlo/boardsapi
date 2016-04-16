@@ -30,10 +30,11 @@ class UserController extends Controller
     // USER DISPLAYS
     protected function showAll()
     {
-        
-        $users = User::all()->first();
-        $users = array_add($users, 'result' , true);
-        return Response::json(array('data' => $users ) );
+
+        $users = User::all();
+        $returnArray = array('result' => true);
+        $returnArray = array_add($returnArray, 'users' , $users);
+        return Response::json(array('data' => $returnArray ) );
     }
 
     protected function login(Request $request)
