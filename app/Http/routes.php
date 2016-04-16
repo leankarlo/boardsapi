@@ -33,13 +33,21 @@ Route::get('/testconnection', 'API\v1\APIRequestController@TestConnection');
 
 /* USERS */
 	Route::group(array('prefix'=>'users'), function(){
+
+		Route::get('get/id={id}', 'API\v1\UserController@getUserData');
 		
 		Route::get('showall', 'API\v1\UserController@showAll');
 	
 		Route::post('login', 'API\v1\UserController@login');
 	
 		Route::get('logout', 'API\v1\UserController@logout');
-		
+
+		Route::post('create', 'API\v1\UserController@createUser');
+
+		Route::post('update', 'API\v1\UserController@updateUser');
+
+		Route::get('delete/id={id}', 'API\v1\UserController@deleteUser');
+
 	});
 /* END USERS */
 
