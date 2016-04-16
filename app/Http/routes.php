@@ -26,9 +26,7 @@ Route::get('/', function () {
 |
 */
 
-Route::group(['middleware' => ['web']], function () {
-    //
-});
+
 
 Route::get('/testconnection', 'API\v1\APIRequestController@TestConnection');
 
