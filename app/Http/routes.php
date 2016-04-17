@@ -35,6 +35,8 @@ Route::get('/testconnection', 'API\v1\APIRequestController@TestConnection');
 	Route::group(array('prefix'=>'users'), function(){
 
 		Route::get('get/id={id}', 'API\v1\UserController@getUserData');
+
+		Route::get('reset_password/id={id}', 'API\v1\UserController@resetPasswordUser');
 		
 		Route::get('showall', 'API\v1\UserController@showAll');
 	

@@ -109,6 +109,22 @@ class UserController extends Controller
         
     }
 
+    protected function resetPasswordUser($id)
+    {
+        $user = User::find($id);
+        
+
+        try {
+            $user->password   = bcrypt('pw1234');
+            $user->save();
+            return Response::json( array('result' => true ,'message' => 'User Password Set to Default!!' ) );
+
+        } catch (Exception $e) {
+            return Response::json( array('result' => false ,'message' => 'Error!! Contact System Admin' ) );
+        }
+
+    }
+
     protected function deleteUser($id)
     {
         $user = User::find($id);
