@@ -109,11 +109,12 @@ class UserController extends Controller
         
     }
 
-    protected function resetPasswordUser($id)
+    protected function resetPasswordUser(Request $request)
     {
-        $user = User::find($id);
-        
+        $input = $request->all();
+        $id = $input['id'];
 
+        $user = User::find($id);
         try {
             $user->password   = bcrypt('pw1234');
             $user->save();
@@ -125,11 +126,11 @@ class UserController extends Controller
 
     }
 
-    protected function deleteUser($id)
+    protected function deleteUser(Request $request)
     {
+        $input = $request->all();
+        $id = $input['id'];
         $user = User::find($id);
-        
-
         try {
             $user->delete();
             return Response::json( array('result' => true ,'message' => 'User Succesfully Deleted!' ) );
@@ -145,8 +146,11 @@ class UserController extends Controller
         return Response::json(array('data' => array('result' => true , 'message' => 'succesfully signed out' ) ));
     }
 
-    protected function getUserData($id)
+    protected function getUserData(Request $request)
     {
+        $input = $request->all();
+        $id = $input['id'];
+
         $user = User::find($id);
         if($user != null){
             return Response::json(array('result' => true ,'data' => $user ) );
