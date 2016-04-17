@@ -48,7 +48,7 @@ Route::get('/testconnection', 'API\v1\APIRequestController@TestConnection');
 
 		Route::post('update', 'API\v1\UserController@updateUser');
 
-		Route::get('delete/id={id}', 'API\v1\UserController@deleteUser');
+		Route::get('delete', 'API\v1\UserController@deleteUser');
 
 	});
 /* END USERS */
