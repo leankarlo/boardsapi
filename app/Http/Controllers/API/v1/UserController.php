@@ -55,7 +55,7 @@ class UserController extends Controller
         // AUTHENTICATE USER
         if (Auth::attempt($userdata) == true) 
         {
-            $user = User::find(Auth::user()->id)->first();
+            $user = User::find(Auth::user()->id);
             return Response::json(array('result' => true, 'data' => $user, 'message' => 'succesfully signed in' ) );
         }
         else{
