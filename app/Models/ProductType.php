@@ -20,4 +20,9 @@ class ProductType extends Model
 		return $this->belongsTo('App\Models\ProductCategory', 'category_id');
 	}
 
+	// public function product()
+	// {
+	// 	return $this->belongsTo('App\Models\Product', 'type');
+	// }
+
 }

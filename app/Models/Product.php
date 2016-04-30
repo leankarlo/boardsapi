@@ -20,6 +20,11 @@ class Product extends Model
         return $this->hasMany('App\Models\ProductTypeDetail', 'product_id');
     }
 
+    public function productType()
+    {
+    	return $this->hasOne('App\Models\ProductType', 'id', 'type');
+    }
+
     public function productStocks()
     {
         return $this->hasMany('App\Models\ProductStock', 'product_id');

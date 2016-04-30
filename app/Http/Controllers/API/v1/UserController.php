@@ -85,6 +85,29 @@ class UserController extends Controller
 
     }
 
+    protected function updatePassword(Request $request){
+        $input              = $request->all();
+
+        $id                 = $input['id'];
+        $currentPassword    = $input['current_password'];
+        $password           = $input['password'];
+
+        $user = User::find($id);
+
+        if($currentPassword == $user->password){
+            
+            $user->password   = bcrypt($password);
+            $user->save();
+
+            return Response::json(array('result' => true ,'message' => 'Password Succesfully Saved!' ) );
+
+        }else{
+            return Response::json(array('result' => false ,'message' => 'Current passeword does not match Please Try again!!' ) );
+        }
+
+        
+    }
+
     protected function updateUser(Request $request) {
         //INITIALIZATION
         $input = $request->all();

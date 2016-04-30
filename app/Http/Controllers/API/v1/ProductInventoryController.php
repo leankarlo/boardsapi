@@ -34,8 +34,10 @@ class ProductInventoryController extends Controller
     {
         $result = ProductStock::select(DB::raw('product_id, count(product_id) AS NumberOfProducts'))
                      ->groupBy('product_id')
-                     ->with('product')
+                     ->with('product.productType')
                      ->get();
+
+        // $result = Product::with('productType')->get();
         // $productInventory = array_add(array('products' => $result), 'result' , true);
         $productInventory = array('result' => true);
         $productInventory = array_add($productInventory, 'data' , $result);

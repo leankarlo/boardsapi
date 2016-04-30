@@ -50,6 +50,8 @@ Route::get('/testconnection', 'API\v1\APIRequestController@TestConnection');
 
 		Route::get('delete', 'API\v1\UserController@deleteUser');
 
+		Route::post('change_password', 'API\v1\UserController@updateUserPassword');
+
 	});
 /* END USERS */
 
