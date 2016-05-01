@@ -56,5 +56,13 @@ Route::get('/testconnection', 'API\v1\APIRequestController@TestConnection');
 /* END USERS */
 
 /* PRODUCTS */
-	Route::get('/products/stock/showall', 'API\v1\ProductInventoryController@ProductInventory_GetAll');
+
+	Route::group(array('prefix'=>'products'), function(){
+
+		Route::get('/stock/showall', 'API\v1\ProductInventoryController@ProductInventory_GetAll');
+
+		Route::get('/stock/serialcode', 'API\v1\ProductInventoryController@ProductStockSerialNumber_Get');
+
+	});
+	
 /* END PRODUCTS */

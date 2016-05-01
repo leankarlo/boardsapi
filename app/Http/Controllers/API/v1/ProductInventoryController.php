@@ -44,6 +44,29 @@ class ProductInventoryController extends Controller
         return Response::json( $productInventory  );
     }
 
+    protected function ProductStockSerialNumber_Get(Request $request) {
+        //INITIALIZATION
+        $input = $request->all();
 
+        $serialNumber = $input['serialnumber'];
+
+        $result = ProductStock::where('serial_number', $serialNumber)
+        ->get();
+
+        if ($result == '[]'){
+            $productSerial = array('result' => false, 'message' => 'invalid serial number');
+            // $productSerial = array_add($productSerial, 'data' , $result);
+            return Response::json( $productSerial  );
+        }
+        else{
+            $productSerial = array('result' => true);
+            $productSerial = array_add($productSerial, 'data' , $result);
+            return Response::json( $productSerial  );
+        }
+
+        
+        
+
+    }
 
 }
