@@ -49,10 +49,12 @@ class ProductInventoryController extends Controller
 
         $serialNumber = $input['serialnumber'];
 
-        $result = ProductStock::where('serial_number', $serialNumber)
+        $result = ProductStock::where('serial_number','=', $serialNumber)
         ->get();
 
-        if ($result == '[]'){
+        // return Response::json( $result->count() );
+
+        if ($result->count() <= 0){
             $productSerial = array('result' => false, 'message' => 'invalid serial number');
             // $productSerial = array_add($productSerial, 'data' , $result);
             return Response::json( $productSerial  );
@@ -113,6 +115,29 @@ class ProductInventoryController extends Controller
         $productInventory = array('result' => true);
         $productInventory = array_add($productInventory, 'data' , $result);
         return Response::json( $productInventory  );
+    }
+
+    protected function ProductStock_Add(Request $request)
+    {
+        //INITIALIZATION
+        $input = $request->all();
+
+        $product = new Product;
+        $product->name = $input['name'];
+        $product->model = $input['model'];
+        $product->type = $input['type'];
+        $product->isSerialCodeRequired = $input['isSerialCodeRequired'];
+
+        try{
+            $product->save();
+            $return = array('result' => true, 'message' => 'New Product has been Added!');
+            return Response::json( $return  );
+
+        }catch(Exception $e){
+            $return = array('result' => false, 'message' => 'Error on saving please contact admin!');
+            return Response::json( $return  );
+        }
+        
     }
 
 }
