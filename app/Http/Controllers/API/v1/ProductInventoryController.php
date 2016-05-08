@@ -48,8 +48,10 @@ class ProductInventoryController extends Controller
         $input = $request->all();
 
         $serialNumber = $input['serialnumber'];
+        $productID = $input['productid'];
 
         $result = ProductStock::where('serial_number','=', $serialNumber)
+        ->where('product_id', '=', $productID)
         ->get();
 
         // return Response::json( $result->count() );
