@@ -65,6 +65,16 @@ class ProductInventoryController extends Controller
 
     }
 
+    protected function Product_GetAll()
+    {
+        $result = Product::with('productType')->get();
+
+        $product = array('result' => true);
+        $product = array_add($product, 'data' , $result);
+        return Response::json( $product );
+    }
+
+
     protected function Product_Create(Request $request)
     {
         //INITIALIZATION
@@ -74,6 +84,29 @@ class ProductInventoryController extends Controller
         $product->name = $input['name'];
         $product->model = $input['model'];
         $product->type = $input['type'];
+        $product->isSerialCodeRequired = $input['isSerialCodeRequired'];
+
+        try{
+            $product->save();
+            $return = array('result' => true, 'message' => 'New Product has been Added!');
+            return Response::json( $return  );
+
+        }catch(Exception $e){
+            $return = array('result' => false, 'message' => 'Error on saving please contact admin!');
+            return Response::json( $return  );
+        }
+        
+    }
+
+    protected function Product_Edit(Request $request)
+    {
+        //INITIALIZATION
+        $input = $request->all();
+
+        $product        = Product::find($input['id']);
+        $product->name  = $input['name'];
+        $product->model = $input['model'];
+        $product->type  = $input['type'];
         $product->isSerialCodeRequired = $input['isSerialCodeRequired'];
 
         try{
@@ -108,6 +141,8 @@ class ProductInventoryController extends Controller
         
     }
 
+
+
     protected function ProductType_GetAll(){
         $result = ProductType::all();
         $productInventory = array('result' => true);
@@ -120,14 +155,13 @@ class ProductInventoryController extends Controller
         //INITIALIZATION
         $input = $request->all();
 
-        $product = new Product;
-        $product->name = $input['name'];
-        $product->model = $input['model'];
-        $product->type = $input['type'];
-        $product->isSerialCodeRequired = $input['isSerialCodeRequired'];
+        $productStock = new ProductStock;
+        $productStock->product_id = $input['product_id'];
+        $productStock->serial_number = $input['serial_number'];
+        $productStock->isAvailable = 1;
 
         try{
-            $product->save();
+            $productStock->save();
             $return = array('result' => true, 'message' => 'New Product has been Added!');
             return Response::json( $return  );
 
