@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API\v1;
 use DB;
 use App\Models\Product;
 use App\Models\ProductStock;
+use App\Models\ProductType;
 use Redirect;
 use View;
 use Response;
@@ -37,8 +38,6 @@ class ProductInventoryController extends Controller
                      ->with('product.productType')
                      ->get();
 
-        // $result = Product::with('productType')->get();
-        // $productInventory = array_add(array('products' => $result), 'result' , true);
         $productInventory = array('result' => true);
         $productInventory = array_add($productInventory, 'data' , $result);
         return Response::json( $productInventory  );
@@ -64,9 +63,56 @@ class ProductInventoryController extends Controller
             return Response::json( $productSerial  );
         }
 
-        
-        
+    }
 
+    protected function Product_Create(Request $request)
+    {
+        //INITIALIZATION
+        $input = $request->all();
+
+        $product = new Product;
+        $product->name = $input['name'];
+        $product->model = $input['model'];
+        $product->type = $input['type'];
+        $product->isSerialCodeRequired = $input['isSerialCodeRequired'];
+
+        try{
+            $product->save();
+            $return = array('result' => true, 'message' => 'New Product has been Added!');
+            return Response::json( $return  );
+
+        }catch(Exception $e){
+            $return = array('result' => false, 'message' => 'Error on saving please contact admin!');
+            return Response::json( $return  );
+        }
+        
+    }
+
+    protected function ProductType_Create(Request $request)
+    {
+        //INITIALIZATION
+        $input = $request->all();
+
+        $productTypeName = $input['name'];
+        $productType = new ProductType;
+        $productType->name = $productTypeName;
+        try{
+            $productType->save();
+            $return = array('result' => true, 'message' => 'New Product Type Added!');
+            return Response::json( $return  );
+
+        }catch(Exception $e){
+            $return = array('result' => false, 'message' => 'Error on saving please contact admin!');
+            return Response::json( $return  );
+        }
+        
+    }
+
+    protected function ProductType_GetAll(){
+        $result = ProductType::all();
+        $productInventory = array('result' => true);
+        $productInventory = array_add($productInventory, 'data' , $result);
+        return Response::json( $productInventory  );
     }
 
 }

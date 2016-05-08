@@ -63,6 +63,12 @@ Route::get('/testconnection', 'API\v1\APIRequestController@TestConnection');
 
 		Route::get('/stock/serialcode', 'API\v1\ProductInventoryController@ProductStockSerialNumber_Get');
 
+		Route::get('/type/all', 'API\v1\ProductInventoryController@ProductType_GetAll');
+
+		Route::get('/type/create', 'API\v1\ProductInventoryController@ProductType_Create');
+
+		Route::get('/create', 'API\v1\ProductInventoryController@Product_Create');
+
 	});
 	
 /* END PRODUCTS */
