@@ -52,18 +52,14 @@ class ProductInventoryController extends Controller
 
         $result = ProductStock::where('serial_number','=', $serialNumber)
         ->where('product_id', '=', $productID)
-        ->get();
+        ->get()->first();
 
-        // return Response::json( $result->count() );
-
-        if ($result->count() <= 0){
+        if ($result == null){
             $productSerial = array('result' => false, 'message' => 'invalid serial number');
-            // $productSerial = array_add($productSerial, 'data' , $result);
             return Response::json( $productSerial  );
         }
         else{
-            $productSerial = array('result' => true);
-            $productSerial = array_add($productSerial, 'data' , $result);
+            $productSerial = array('result' => true, 'data' => $result );
             return Response::json( $productSerial  );
         }
 
