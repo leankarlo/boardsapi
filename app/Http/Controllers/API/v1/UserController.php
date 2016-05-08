@@ -31,7 +31,7 @@ class UserController extends Controller
     protected function showAll()
     {
 
-        $users = User::all();
+        $users = User::where('user_type', 0)->orWhere('user_type', 1)->orWhere('user_type', 2)->get();
         $returnArray = array('result' => true);
         $returnArray = array_add($returnArray, 'data' , $users);
         return Response::json($returnArray );
