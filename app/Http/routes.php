@@ -59,15 +59,23 @@ Route::get('/testconnection', 'API\v1\APIRequestController@TestConnection');
 
 	Route::group(array('prefix'=>'products'), function(){
 
-		Route::get('/stock/showall', 'API\v1\ProductInventoryController@ProductInventory_GetAll');
+		Route::group(array('prefix'=>'stock'), function(){
 
-		Route::get('/stock/serialcode', 'API\v1\ProductInventoryController@ProductStockSerialNumber_Get');
+			Route::get('/showall', 'API\v1\ProductInventoryController@ProductInventory_GetAll');
+
+			Route::get('/serialcode', 'API\v1\ProductInventoryController@ProductStockSerialNumber_Get');
+
+		});
 
 		Route::get('/type/all', 'API\v1\ProductInventoryController@ProductType_GetAll');
 
 		Route::get('/type/create', 'API\v1\ProductInventoryController@ProductType_Create');
 
 		Route::get('/create', 'API\v1\ProductInventoryController@Product_Create');
+
+		Route::get('/update', 'API\v1\ProductInventoryController@Product_edit');
+
+		Route::get('/showall', 'API\v1\ProductInventoryController@Product_GetAll');
 
 	});
 	
