@@ -176,16 +176,18 @@ class ProductInventoryController extends Controller
         $input = $request->all();
 
         $quantity = $input['quatity'];
-        $i = 0;
-        for ($i < $quantity; $i++){
+        $count = 0;
+
+        for($i = 0;$i < $quantity; $i++){
+            
             $productStock = new ProductStock;
             $productStock->product_id = $input['product_id'];
             $productStock->isAvailable = 1;
             $productStock->save();
-    
+            $count++;
         }
 
-        $return = array('result' => true, 'message' => $i ' New Product has been Added!');
+        $return = array('result' => true, 'message' => $i. ' New Product has been Added!');
         return Response::json( $return  );
         
     }
