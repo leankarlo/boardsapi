@@ -65,6 +65,10 @@ Route::get('/testconnection', 'API\v1\APIRequestController@TestConnection');
 
 			Route::get('/serialcode', 'API\v1\ProductInventoryController@ProductStockSerialNumber_Get');
 
+			Route::get('/add_serial_required', 'API\v1\ProductInventoryController@ProductStock_Add_SerialCodeRquired');
+
+			Route::get('/add_no_serial', 'API\v1\ProductInventoryController@ProductStock_Add');
+
 		});
 
 		Route::group(array('prefix'=>'type'), function(){
@@ -84,3 +88,14 @@ Route::get('/testconnection', 'API\v1\APIRequestController@TestConnection');
 	});
 	
 /* END PRODUCTS */
+
+/* BANKING */
+
+	Route::group(array('prefix'=>'banking'), function(){
+
+		Route::get('/showall', 'API\v1\BankingController@Banking_GetAll');
+
+		Route::get('/create', 'API\v1\BankingController@Banking_Create');
+
+	});
+/* END BANKING */
