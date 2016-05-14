@@ -175,7 +175,7 @@ class ProductInventoryController extends Controller
         //INITIALIZATION
         $input = $request->all();
 
-        $quantity = $input['quatity'];
+        $quantity = $input['quantity'];
         $count = 0;
 
         for($i = 0;$i < $quantity; $i++){
