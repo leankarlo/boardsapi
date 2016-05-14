@@ -141,8 +141,6 @@ class ProductInventoryController extends Controller
         
     }
 
-
-
     protected function ProductType_GetAll(){
         $result = ProductType::all();
         $productInventory = array('result' => true);

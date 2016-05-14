@@ -67,9 +67,13 @@ Route::get('/testconnection', 'API\v1\APIRequestController@TestConnection');
 
 		});
 
-		Route::get('/type/all', 'API\v1\ProductInventoryController@ProductType_GetAll');
+		Route::group(array('prefix'=>'type'), function(){
 
-		Route::get('/type/create', 'API\v1\ProductInventoryController@ProductType_Create');
+			Route::get('/all', 'API\v1\ProductInventoryController@ProductType_GetAll');
+
+			Route::get('/create', 'API\v1\ProductInventoryController@ProductType_Create');
+
+		});
 
 		Route::get('/create', 'API\v1\ProductInventoryController@Product_Create');
 
