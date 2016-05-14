@@ -111,7 +111,7 @@ class ProductInventoryController extends Controller
 
         try{
             $product->save();
-            $return = array('result' => true, 'message' => 'New Product has been Added!');
+            $return = array('result' => true, 'message' => 'Product has been Updated!');
             return Response::json( $return  );
 
         }catch(Exception $e){
