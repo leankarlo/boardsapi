@@ -84,6 +84,7 @@ class ProductInventoryController extends Controller
         $product->name = $input['name'];
         $product->model = $input['model'];
         $product->type = $input['type'];
+        $product->price = $input['price'];
         $product->isSerialCodeRequired = $input['isSerialCodeRequired'];
 
         try{
@@ -107,6 +108,7 @@ class ProductInventoryController extends Controller
         $product->name  = $input['name'];
         $product->model = $input['model'];
         $product->type  = $input['type'];
+        $product->price = $input['price'];
         $product->isSerialCodeRequired = $input['isSerialCodeRequired'];
 
         try{
