@@ -44,4 +44,11 @@ class User extends Model implements AuthenticatableContract,
     // {
     //     return $this->hasOne('App\Models\Image','id','image_id');
     // }
+
+
+    public function customer()
+    {
+        return $this->hasMany('App\Models\Customer', 'user_id');
+    }
+
 }

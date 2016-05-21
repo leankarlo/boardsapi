@@ -99,3 +99,28 @@ Route::get('/testconnection', 'API\v1\APIRequestController@TestConnection');
 
 	});
 /* END BANKING */
+
+
+/* USERS */
+	Route::group(array('prefix'=>'customers'), function(){
+
+		Route::get('/get', 'API\v1\UserController@getUserData');
+
+		Route::get('/reset_password', 'API\v1\UserController@resetPasswordUser');
+		
+		Route::get('/showall', 'API\v1\CustomerController@showAll');
+	
+		Route::post('login', 'API\v1\UserController@login');
+	
+		Route::get('logout', 'API\v1\UserController@logout');
+
+		Route::post('create', 'API\v1\CustomerController@createUser');
+
+		Route::post('update', 'API\v1\UserController@updateUser');
+
+		Route::get('delete', 'API\v1\UserController@deleteUser');
+
+		Route::post('change_password', 'API\v1\UserController@updateUserPassword');
+
+	});
+/* END USERS */
