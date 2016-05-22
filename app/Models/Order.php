@@ -13,6 +13,8 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 class Order extends Model
 {
 
+    protected $table = 'orders';
+
     public function orderDetails()
     {
         return $this->hasMany('App\Models\OrderDetail', 'Order_id');

@@ -13,7 +13,7 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 class OrderDetail extends Model
 {
 
-    // protected $table = 'order';
+    protected $table = 'order_details';
 
     public function order()
     {

@@ -46,9 +46,9 @@ class CheckOutController extends Controller
 
         $order = new Order;
         $order->customer_id = $input['customer_id'];
-        $order->customer_id = $input['subtotal'];
-        $order->customer_id = $input['discount_price'];
-        $order->customer_id = $input['total_price'];
+        $order->initial_selling_price = $input['subtotal'];
+        $order->discount_price = $input['discount'];
+        $order->total_price = $input['total'];
         $order->created_by  = $input['created_by'];
         $order->save();
 
@@ -56,7 +56,7 @@ class CheckOutController extends Controller
         $payment->order_id = $order->id;
         $payment->save();
 
-        return Response::json(array('result' => true, 'data' => array('order_id' => $order->id, 'payment_id' => $payment_id), 'message' => 'succesfully created an order' ) );
+        return Response::json(array('result' => true, 'data' => array('order_id' => $order->id, 'payment_id' => $payment->id), 'message' => 'succesfully created an order' ) );
 
     }
 
@@ -66,9 +66,9 @@ class CheckOutController extends Controller
 
         $order = new Order;
         $order->customer_id = $input['customer_id'];
-        $order->customer_id = $input['subtotal'];
-        $order->customer_id = $input['discount_price'];
-        $order->customer_id = $input['total_price'];
+        $order->initial_selling_price = $input['subtotal'];
+        $order->discount_price = $input['discount'];
+        $order->total_price = $input['total'];
         $order->created_by  = $input['created_by'];
         $order->save();
 

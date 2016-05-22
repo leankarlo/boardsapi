@@ -12,6 +12,7 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
 class PaymentDetail extends Model
 {
+	protected $table = 'payment_details';
 
     public function paymentDetails()
     {

@@ -13,6 +13,8 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 class Payment extends Model
 {
 
+	protected $table = 'payments';
+
     public function order()
     {
         return $this->hasOne('App\Models\Order', 'id', 'order_id');
