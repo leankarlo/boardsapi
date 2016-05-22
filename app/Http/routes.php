@@ -134,7 +134,7 @@ Route::get('/testconnection', 'API\v1\APIRequestController@TestConnection');
 
 		Route::post('/details/new', 'API\v1\CheckOutController@createPaymentDetails');
 
-		Route::post('/ispayed_status/update', 'API\v1\CheckOutController@updatePaymentSatus');
+		Route::get('/ispayed_status/update', 'API\v1\CheckOutController@updatePaymentSatus');
 
 	});
 /* END payment */

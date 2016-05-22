@@ -42,7 +42,7 @@ class CheckOutController extends Controller
         $order->customer_id = $input['initial_selling_price'];
         $order->customer_id = $input['discount_price'];
         $order->customer_id = $input['total_price'];
-        $order->created_by = $input['created_by'];
+        $order->created_by  = $input['created_by'];
         $order->save();
 
         return Response::json(array('result' => true, 'data' => array('order_id' => $order->id), 'message' => 'succesfully created an order' ) );
