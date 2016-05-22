@@ -95,32 +95,46 @@ Route::get('/testconnection', 'API\v1\APIRequestController@TestConnection');
 
 		Route::get('/showall', 'API\v1\BankingController@Banking_GetAll');
 
-		Route::get('/create', 'API\v1\BankingController@Banking_Create');
+		Route::get('/create', 'API\v1\BankingController@BankingCreate');
+
+		Route::get('/update', 'API\v1\BankingController@BankingUpdate');
 
 	});
 /* END BANKING */
 
 
-/* USERS */
+/* Customer */
 	Route::group(array('prefix'=>'customers'), function(){
-
-		Route::get('/get', 'API\v1\UserController@getUserData');
-
-		Route::get('/reset_password', 'API\v1\UserController@resetPasswordUser');
 		
 		Route::get('/showall', 'API\v1\CustomerController@showAll');
-	
-		Route::post('login', 'API\v1\UserController@login');
-	
-		Route::get('logout', 'API\v1\UserController@logout');
 
 		Route::post('create', 'API\v1\CustomerController@createUser');
 
-		Route::post('update', 'API\v1\UserController@updateUser');
+		Route::post('update', 'API\v1\CustomerController@updateUser');
 
-		Route::get('delete', 'API\v1\UserController@deleteUser');
-
-		Route::post('change_password', 'API\v1\UserController@updateUserPassword');
+		Route::get('delete', 'API\v1\CustomerController@deleteUser');
 
 	});
-/* END USERS */
+/* End Customer */
+
+/* order */
+	Route::group(array('prefix'=>'order'), function(){
+
+		Route::post('/new', 'API\v1\CheckOutController@createOrder');
+
+		Route::post('/details/new', 'API\v1\CheckOutController@createOrderDetails');
+
+	});
+/* END order */
+
+/* payment */
+	Route::group(array('prefix'=>'payment'), function(){
+
+		Route::get('/create', 'API\v1\CheckOutController@createPayment');
+
+		Route::post('/details/new', 'API\v1\CheckOutController@createPaymentDetails');
+
+		Route::post('/ispayed_status/update', 'API\v1\CheckOutController@updatePaymentSatus');
+
+	});
+/* END payment */

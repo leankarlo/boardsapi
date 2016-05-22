@@ -38,7 +38,7 @@ class BankingController extends Controller
         return Response::json( $banking  );
     }
 
-    protected function Banking_Create(Request $request)
+    protected function BankingCreate(Request $request)
     {
         $input = $request->all();
 
@@ -50,6 +50,28 @@ class BankingController extends Controller
         try{
             $banking->save();
             $return = array('result' => true, 'message' => 'New Banking Payment has been Added!');
+            return Response::json( $return  );
+
+        }catch(Exception $e){
+            $return = array('result' => false, 'message' => 'Error on saving please contact admin!');
+            return Response::json( $return  );
+        }
+
+    }
+
+    protected function BankingUpdate(Request $request)
+    {
+        $input  = $request->all();
+        $id     = $input['id']
+
+        $banking = Banking::find($id);
+        $banking->name              = $input['name'];
+        $banking->banking_fee       = $input['fee'];
+        $banking->chargeToCustomer  = $input['chargeToCustomer'];
+
+        try{
+            $banking->save();
+            $return = array('result' => true, 'message' => 'Banking Payment has been Updated!');
             return Response::json( $return  );
 
         }catch(Exception $e){

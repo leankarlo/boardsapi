@@ -10,19 +10,17 @@ use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
-class Customer extends Model
+class Payment extends Model
 {
-
-    protected $table = 'customers';
-
-    public function user()
-    {
-    	return $this->hasOne('App\Models\user', 'id');
-    }
 
     public function order()
     {
-        return $this->hasMany('App\Models\Order', 'customer_id');
+        return $this->hasOne('App\Models\Order', 'id', 'order_id');
+    }
+
+    public function paymentDetails()
+    {
+        return $this->hasMany('App\Models\PaymentDetails', 'order_id');
     }
 
 }

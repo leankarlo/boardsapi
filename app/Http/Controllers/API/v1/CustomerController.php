@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API\v1;
 
 use App\Models\User;
+use App\Models\Customer;
 use Redirect;
 use View;
 use Response;
@@ -64,32 +65,10 @@ class CustomerController extends Controller
         
 
 
-        return Response::json(array('result' => true ,'message' => $user->id ) );
+        return Response::json(array('result' => true ,'message' => 'succesfully  saved' ) );
 
     }
 
-    protected function updatePassword(Request $request){
-        $input              = $request->all();
-
-        $id                 = $input['id'];
-        $currentPassword    = $input['current_password'];
-        $password           = $input['password'];
-
-        $user = User::find($id);
-
-        if($currentPassword == $user->password){
-            
-            $user->password   = bcrypt($password);
-            $user->save();
-
-            return Response::json(array('result' => true ,'message' => 'Password Succesfully Saved!' ) );
-
-        }else{
-            return Response::json(array('result' => false ,'message' => 'Current passeword does not match Please Try again!!' ) );
-        }
-
-        
-    }
 
     protected function updateUser(Request $request) {
         //INITIALIZATION
@@ -135,22 +114,6 @@ class CustomerController extends Controller
         
     }
 
-    protected function resetPasswordUser(Request $request)
-    {
-        $input = $request->all();
-        $id = $input['id'];
-
-        $user = User::find($id);
-        try {
-            $user->password   = bcrypt('pw1234');
-            $user->save();
-            return Response::json( array('result' => true ,'message' => 'User Password Set to Default!!' ) );
-
-        } catch (Exception $e) {
-            return Response::json( array('result' => false ,'message' => 'Error!! Contact System Admin' ) );
-        }
-
-    }
 
     protected function deleteUser(Request $request)
     {
