@@ -62,7 +62,7 @@ class BankingController extends Controller
     protected function BankingUpdate(Request $request)
     {
         $input  = $request->all();
-        $id     = $input['id']
+        $id     = $input['id'];
 
         $banking = Banking::find($id);
         $banking->name              = $input['name'];

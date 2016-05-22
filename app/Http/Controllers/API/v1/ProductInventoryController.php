@@ -65,6 +65,7 @@ class ProductInventoryController extends Controller
 
     }
 
+
     protected function Product_GetAll()
     {
         $result = Product::with('productType')->get();
