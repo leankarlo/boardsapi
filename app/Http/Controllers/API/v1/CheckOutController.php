@@ -46,7 +46,7 @@ class CheckOutController extends Controller
 
         $order = new Order;
         $order->customer_id = $input['customer_id'];
-        $order->customer_id = $input['initial_selling_price'];
+        $order->customer_id = $input['subtotal'];
         $order->customer_id = $input['discount_price'];
         $order->customer_id = $input['total_price'];
         $order->created_by  = $input['created_by'];
@@ -66,7 +66,7 @@ class CheckOutController extends Controller
 
         $order = new Order;
         $order->customer_id = $input['customer_id'];
-        $order->customer_id = $input['initial_selling_price'];
+        $order->customer_id = $input['subtotal'];
         $order->customer_id = $input['discount_price'];
         $order->customer_id = $input['total_price'];
         $order->created_by  = $input['created_by'];
