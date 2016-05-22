@@ -10,6 +10,7 @@ use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Models\Banking;
 use App\Models\ProductStock;
+use App\Models\Product;
 use Redirect;
 use View;
 use Response;
@@ -35,7 +36,28 @@ class CheckOutController extends Controller
     */
 
     protected function test() {
-        
+        $productStock = ProductStock::where('isAvailable',1)->where('product_id', 1)->get()->first();
+        return Response::json($productStock);
+    }
+
+    protected function createOrderAndPayment(Request $request) {
+
+        $input = $request->all();
+
+        $order = new Order;
+        $order->customer_id = $input['customer_id'];
+        $order->customer_id = $input['initial_selling_price'];
+        $order->customer_id = $input['discount_price'];
+        $order->customer_id = $input['total_price'];
+        $order->created_by  = $input['created_by'];
+        $order->save();
+
+        $payment = new Payment;
+        $payment->order_id = $order->id;
+        $payment->save();
+
+        return Response::json(array('result' => true, 'data' => array('order_id' => $order->id, 'payment_id' => $payment_id), 'message' => 'succesfully created an order' ) );
+
     }
 
     protected function createOrder(Request $request) {
@@ -79,7 +101,7 @@ class CheckOutController extends Controller
             if($order['product_stock_id'] == '' && $order['product_id'] != ''){
                 
                 for($i=0;$i < $order['quantity']; $i++){
-                    $productStock = ProductStock::where('isAvailability',1)->where('product ', $order['product_id'])->first();
+                    $productStock = ProductStock::where('isAvailable',1)->where('product_id', $order['product_id'])->get()->first();
                     $productStock->isAvailability = 0;
                     $productStock->save();
                 }
@@ -97,7 +119,6 @@ class CheckOutController extends Controller
             $orderDetails->item_discount    = $order['item_discount'];
             $orderDetails->selling_price    = $order['total_price'];
             $orderDetails->save();
-            }
 
         }
 

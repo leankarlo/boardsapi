@@ -26,6 +26,7 @@ Route::get('/', function () {
 |
 */
 
+Route::get('/test', 'API\v1\CheckOutController@test');
 
 
 Route::get('/testconnection', 'API\v1\APIRequestController@TestConnection');
@@ -121,6 +122,8 @@ Route::get('/testconnection', 'API\v1\APIRequestController@TestConnection');
 	Route::group(array('prefix'=>'order'), function(){
 
 		Route::post('/new', 'API\v1\CheckOutController@createOrder');
+
+		Route::post('/payment/new', 'API\v1\CheckOutController@createOrderAndPayment');
 
 		Route::post('/details/new', 'API\v1\CheckOutController@createOrderDetails');
 
