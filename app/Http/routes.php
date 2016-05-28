@@ -26,7 +26,9 @@ Route::get('/', function () {
 |
 */
 
-Route::get('/test', 'API\v1\CheckOutController@test');
+Route::get('/testget', 'API\v1\CheckOutController@test');
+
+Route::post('/testpost', 'API\v1\CheckOutController@test');
 
 
 Route::get('/testconnection', 'API\v1\APIRequestController@TestConnection');
