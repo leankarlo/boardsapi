@@ -115,6 +115,7 @@ class CheckOutController extends Controller
             // - update orderdetails
             $orderDetails = new OrderDetail;
             $orderDetails->order_id         = $order_id;
+            $orderDetails->srp = $order['srp'];
             $orderDetails->product_stock_id = $order['product_stock_id'];
             $orderDetails->product_id = $order['product_id'];
             $orderDetails->quantity    = $order['quantity'];
