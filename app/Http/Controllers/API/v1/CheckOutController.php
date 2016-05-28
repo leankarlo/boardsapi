@@ -102,10 +102,9 @@ class CheckOutController extends Controller
                 
                 for($i=0;$i < $order['quantity']; $i++){
                     $productStock = ProductStock::where('isAvailable',1)->where('product_id', $order['product_id'])->get()->first();
-                    $productStock->isAvailability = 0;
+                    $productStock->isAvailable = 0;
                     $productStock->save();
                 }
-
             }else{ // - check if product has serial number
                 $productStock = ProductStock::find($order['product_stock_id']);
                 $productStock->isAvailable = 0;
