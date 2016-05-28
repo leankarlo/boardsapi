@@ -35,9 +35,10 @@ class CheckOutController extends Controller
     |
     */
 
-    protected function test() {
-        $productStock = ProductStock::where('isAvailable',1)->where('product_id', 1)->get()->first();
-        return Response::json($productStock);
+    protected function test(Request $request){
+        $input = $request->all();
+
+        return Response::json($input);
     }
 
     protected function createOrderAndPayment(Request $request) {
@@ -115,6 +116,8 @@ class CheckOutController extends Controller
             $orderDetails = new OrderDetail;
             $orderDetails->order_id         = $order_id;
             $orderDetails->product_stock_id = $order['product_stock_id'];
+            $orderDetails->product_id = $order['product_id'];
+            $orderDetails->quantity    = $order['quantity'];
             $orderDetails->item_discount    = $order['item_discount'];
             $orderDetails->selling_price    = $order['total_price'];
             $orderDetails->save();
