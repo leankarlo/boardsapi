@@ -154,8 +154,8 @@ class CheckOutController extends Controller
         $payment = Payment::where('order_id', $order_id)->get()->first();
         $payment->isPayed = $input['status'];
         $payment->save();
-        return Response::json($payment);
-        // return Response::json(array('result' => true,  'message' => 'succesfully updated a payment isPayed status' ) );
+        // return Response::json($payment);
+        return Response::json(array('result' => true,  'message' => 'succesfully updated a payment isPayed status' ) );
     }
 
 }
