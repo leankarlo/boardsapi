@@ -46,6 +46,16 @@ class CustomerController extends Controller
         $username       = $input['username'];
         $accessType     = $input['accessType'];
 
+        //check username & email if exist
+        $username = User::where('username', $input['username'])->get()->first();
+        if($username != null){
+            return Response::json(array('result' => false ,'message' => 'Username Already Exist' ) );
+        }
+        $email = User::where('email', $input['email'])->get()->first();
+        if($email != null){
+            return Response::json(array('result' => false ,'message' => 'Username Already Exist' ) );
+        }
+
         $user = new User;
         $user->email   = $email;        
         $user->password   = bcrypt('pw1234');
@@ -53,7 +63,7 @@ class CustomerController extends Controller
         $user->user_type   = $accessType;   
         $user->save();
 
-        if($accessType == 4){
+        if($accessType == 4 || $accessType == 3){
             $customer = new Customer;
             $customer->user_id = $user->id;
             $customer->lastname = $input['lastname'];
