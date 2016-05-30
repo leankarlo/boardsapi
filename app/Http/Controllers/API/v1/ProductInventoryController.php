@@ -33,7 +33,8 @@ class ProductInventoryController extends Controller
     // USER DISPLAYS
     protected function ProductInventory_GetAll()
     {
-        $result = ProductStock::select(DB::raw('product_id, count(product_id) AS NumberOfProducts'))
+        $result = ProductStock::where('isAvailable',1)
+                     ->select(DB::raw('product_id, count(product_id) AS NumberOfProducts'))
                      ->groupBy('product_id')
                      ->with('product.productType')
                      ->get();
