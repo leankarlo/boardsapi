@@ -72,6 +72,8 @@ Route::get('/testconnection', 'API\v1\APIRequestController@TestConnection');
 
 			Route::get('/add_no_serial', 'API\v1\ProductInventoryController@ProductStock_Add');
 
+			Route::get('/get', 'API\v1\ProductInventoryController@ProductStock_GetProduct');
+
 		});
 
 		Route::group(array('prefix'=>'type'), function(){

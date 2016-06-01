@@ -95,7 +95,7 @@ class CustomerController extends Controller
             $user->user_type   = $accessType;   
             $user->save();
 
-            if($accessType == 4){
+            if($accessType == 4 || $accessType == 3){
                 $customer = Customer::where('user_id', $input['id'])->get()->first();
                 if ($customer != null)
                 {

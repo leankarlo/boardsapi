@@ -33,7 +33,7 @@ class ProductInventoryController extends Controller
     // USER DISPLAYS
     protected function ProductInventory_GetAll()
     {
-        $result = ProductStock::where('isAvailable',1)
+        $result = ProductStock::where('isAvailable',1)->where('isRemovedRemark',0)
                      ->select(DB::raw('product_id, count(product_id) AS NumberOfProducts'))
                      ->groupBy('product_id')
                      ->with('product.productType')
@@ -53,6 +53,7 @@ class ProductInventoryController extends Controller
 
         $result = ProductStock::where('serial_number','=', $serialNumber)
         ->where('product_id', '=', $productID)
+        ->where('isRemovedRemark',0)
         ->get()->first();
 
         if ($result == null){
@@ -192,8 +193,47 @@ class ProductInventoryController extends Controller
         }
 
         $return = array('result' => true, 'message' => $i. ' New Product has been Added!');
-        return Response::json( $return  );
+        return Response::json( $return  );   
+    }
+
+    protected function ProductStock_Remove(Request $request){
+        $input = $request->all();
+
+        // 0 = not removed default value
+        // 1 = Defect
+        // 2 = Error on Input
+
+        try{
+
+            $productStockID = $input['productstock_id'];
+            $productDeleteRemark = $input['deleteRemarkID'];
+    
+            $productStock = ProductStock::find($productStockID);
+            $productStock->isRemovedRemark = $productDeleteRemark;
+            $productStock->save();
+    
+            $return = array('result' => true, 'message' => $i. 'Product Stock has been Removed!');
+            return Response::json( $return  );   
+
+        }catch(Exception $e){
+            $return = array('result' => false, 'message' => $i. 'Error on Removing Product. Please Contact Admin!');
+            return Response::json( $return  );
+        }
+
         
+    }
+
+    protected function ProductStock_GetProduct(Request $request){
+
+        $input = $request->all();
+        $productID = $input['productID'];
+
+        $product = ProductStock::where('product_id', $productID)->get();
+
+        $productStock = array('result' => true);
+        $productStock = array_add($productStock, 'data' , $product);
+        return Response::json( $productStock  );
+
     }
 
 }

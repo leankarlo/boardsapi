@@ -38,8 +38,6 @@ class CheckOutController extends Controller
     protected function test(Request $request){
         $input = $request->all();
 
-        $username = User::where('username', $input['username'])->get()->first();
-
         return Response::json($input);
     }
 
