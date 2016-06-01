@@ -47,13 +47,13 @@ class CustomerController extends Controller
         $accessType     = $input['accessType'];
 
         //check username & email if exist
-        $username = User::where('username', $input['username'])->get()->first();
-        if($username != null){
+        $usernameCheck = User::where('username', $input['username'])->get()->first();
+        if($usernameCheck != null){
             return Response::json(array('result' => false ,'message' => 'Username Already Exist' ) );
         }
-        $email = User::where('email', $input['email'])->get()->first();
-        if($email != null){
-            return Response::json(array('result' => false ,'message' => 'Username Already Exist' ) );
+        $emailCheck = User::where('email', $input['email'])->get()->first();
+        if($emailCheck != null){
+            return Response::json(array('result' => false ,'message' => 'Email Already Exist' ) );
         }
 
         $user = new User;
@@ -75,7 +75,7 @@ class CustomerController extends Controller
         
 
 
-        return Response::json(array('result' => true ,'message' => 'succesfully  saved' ) );
+        return Response::json(array('result' => true ,'message' => $email ) );
 
     }
 
