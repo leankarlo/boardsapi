@@ -74,6 +74,10 @@ Route::get('/testconnection', 'API\v1\APIRequestController@TestConnection');
 
 			Route::get('/get', 'API\v1\ProductInventoryController@ProductStock_GetProduct');
 
+			Route::get('/remove_isSerialCodeRequired', 'API\v1\ProductInventoryController@ProductStock_GetProduct');
+
+			Route::get('/remove_productquantity', 'API\v1\ProductInventoryController@ProductStock_Remove');
+
 		});
 
 		Route::group(array('prefix'=>'type'), function(){

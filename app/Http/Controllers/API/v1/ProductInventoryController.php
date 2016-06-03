@@ -157,10 +157,15 @@ class ProductInventoryController extends Controller
     {
         //INITIALIZATION
         $input = $request->all();
+        $imei = '';
+        if( isset($input['imei'])){
+            $imei = $input['imei'];
+        }
 
         $productStock = new ProductStock;
         $productStock->product_id = $input['product_id'];
         $productStock->serial_number = $input['serial_number'];
+        $productStock->imei = $imei;
         $productStock->isAvailable = 1;
 
         try{
@@ -207,10 +212,76 @@ class ProductInventoryController extends Controller
 
             $productStockID = $input['productstock_id'];
             $productDeleteRemark = $input['deleteRemarkID'];
+            $productDeleteRemark = $input['quantity'];
     
             $productStock = ProductStock::find($productStockID);
             $productStock->isRemovedRemark = $productDeleteRemark;
             $productStock->save();
+    
+            $return = array('result' => true, 'message' => $i. 'Product Stock has been Removed!');
+            return Response::json( $return  );   
+
+        }catch(Exception $e){
+            $return = array('result' => false, 'message' => $i. 'Error on Removing Product. Please Contact Admin!');
+            return Response::json( $return  );
+        }
+
+        
+    }
+
+    protected function ProductStock_Remove(Request $request){
+        $input = $request->all();
+
+        // 0 = not removed default value
+        // 1 = Defect
+        // 2 = Error on Input
+
+        try{
+
+            $productID = $input['product_id'];
+            $productDeleteRemark = $input['deleteremarkid'];
+            $quantity = $input['quantity'];
+            $count = 0;
+    
+            for($i = 0;$i < $quantity; $i++){
+                $productStock = ProductStock::where('product_id', $productID)->where('isAvailable', 1)->get()->first();
+                $productStock->isRemovedRemark = $productDeleteRemark;
+                $productStock->save();
+                $count++;
+            }
+            
+            
+    
+            $return = array('result' => true, 'message' => $i. 'Product Stock has been Removed!');
+            return Response::json( $return  );   
+
+        }catch(Exception $e){
+            $return = array('result' => false, 'message' => $i. 'Error on Removing Product. Please Contact Admin!');
+            return Response::json( $return  );
+        }
+
+        
+    }
+
+    protected function ProductStock_RemoveSerialCode(Request $request){
+        $input = $request->all();
+
+        // 0 = not removed default value
+        // 1 = Defect
+        // 2 = Error on Input
+
+        try{
+
+            $productID = $input['product_id'];
+            $productDeleteRemark = $input['deleteremarkid'];
+            $serialnumber = $input['serialnumber'];
+            $count = 0;
+    
+            $productStock = ProductStock::where('product_id', $productID)->where('serial_number', $serialnumber)->get()->first();
+            $productStock->isRemovedRemark = $productDeleteRemark;
+            $productStock->save();
+            
+            
     
             $return = array('result' => true, 'message' => $i. 'Product Stock has been Removed!');
             return Response::json( $return  );   
