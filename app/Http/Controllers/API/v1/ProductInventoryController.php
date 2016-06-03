@@ -201,33 +201,33 @@ class ProductInventoryController extends Controller
         return Response::json( $return  );   
     }
 
-    protected function ProductStock_Remove(Request $request){
-        $input = $request->all();
+    // protected function ProductStock_Remove(Request $request){
+    //     $input = $request->all();
 
-        // 0 = not removed default value
-        // 1 = Defect
-        // 2 = Error on Input
+    //     // 0 = not removed default value
+    //     // 1 = Defect
+    //     // 2 = Error on Input
 
-        try{
+    //     try{
 
-            $productStockID = $input['productstock_id'];
-            $productDeleteRemark = $input['deleteRemarkID'];
-            $productDeleteRemark = $input['quantity'];
+    //         $productStockID = $input['productstock_id'];
+    //         $productDeleteRemark = $input['deleteRemarkID'];
+    //         $productDeleteRemark = $input['quantity'];
     
-            $productStock = ProductStock::find($productStockID);
-            $productStock->isRemovedRemark = $productDeleteRemark;
-            $productStock->save();
+    //         $productStock = ProductStock::find($productStockID);
+    //         $productStock->isRemovedRemark = $productDeleteRemark;
+    //         $productStock->save();
     
-            $return = array('result' => true, 'message' => $i. 'Product Stock has been Removed!');
-            return Response::json( $return  );   
+    //         $return = array('result' => true, 'message' => $i. 'Product Stock has been Removed!');
+    //         return Response::json( $return  );   
 
-        }catch(Exception $e){
-            $return = array('result' => false, 'message' => $i. 'Error on Removing Product. Please Contact Admin!');
-            return Response::json( $return  );
-        }
+    //     }catch(Exception $e){
+    //         $return = array('result' => false, 'message' => $i. 'Error on Removing Product. Please Contact Admin!');
+    //         return Response::json( $return  );
+    //     }
 
         
-    }
+    // }
 
     protected function ProductStock_Remove(Request $request){
         $input = $request->all();
