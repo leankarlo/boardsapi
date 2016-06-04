@@ -283,11 +283,11 @@ class ProductInventoryController extends Controller
             
             
     
-            $return = array('result' => true, 'message' => $i. 'Product Stock has been Removed!');
+            $return = array('result' => true, 'message' => 'Product Stock has been Removed!');
             return Response::json( $return  );   
 
         }catch(Exception $e){
-            $return = array('result' => false, 'message' => $i. 'Error on Removing Product. Please Contact Admin!');
+            $return = array('result' => false, 'message' => 'Error on Removing Product. Please Contact Admin!');
             return Response::json( $return  );
         }
 
