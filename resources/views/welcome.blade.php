@@ -38,7 +38,7 @@
     <body>
         <div class="container">
             <div class="content">
-                <div class="title">Laravel 5 .2</div>
+                <div class="title">STAGING BOARDS API</div>
             </div>
         </div>
     </body>
