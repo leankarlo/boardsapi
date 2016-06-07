@@ -89,6 +89,7 @@ class ProductInventoryController extends Controller
         $product->type = $input['type'];
         $product->price = $input['price'];
         $product->isSerialCodeRequired = $input['isSerialCodeRequired'];
+        $product->isIMEIRequired = $input['isIMEIRequired'];
 
         try{
             $product->save();
@@ -113,6 +114,7 @@ class ProductInventoryController extends Controller
         $product->type  = $input['type'];
         $product->price = $input['price'];
         $product->isSerialCodeRequired = $input['isSerialCodeRequired'];
+        $product->isIMEIRequired = $input['isIMEIRequired'];
 
         try{
             $product->save();
