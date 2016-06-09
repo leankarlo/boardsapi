@@ -203,35 +203,7 @@ class ProductInventoryController extends Controller
         return Response::json( $return  );   
     }
 
-    // protected function ProductStock_Remove(Request $request){
-    //     $input = $request->all();
-
-    //     // 0 = not removed default value
-    //     // 1 = Defect
-    //     // 2 = Error on Input
-
-    //     try{
-
-    //         $productStockID = $input['productstock_id'];
-    //         $productDeleteRemark = $input['deleteRemarkID'];
-    //         $productDeleteRemark = $input['quantity'];
-    
-    //         $productStock = ProductStock::find($productStockID);
-    //         $productStock->isRemovedRemark = $productDeleteRemark;
-    //         $productStock->save();
-    
-    //         $return = array('result' => true, 'message' => $i. 'Product Stock has been Removed!');
-    //         return Response::json( $return  );   
-
-    //     }catch(Exception $e){
-    //         $return = array('result' => false, 'message' => $i. 'Error on Removing Product. Please Contact Admin!');
-    //         return Response::json( $return  );
-    //     }
-
-        
-    // }
-
-    protected function ProductStock_Remove(Request $request){
+    protected function ProductStock_PullOut(Request $request){
         $input = $request->all();
 
         // 0 = not removed default value
@@ -265,7 +237,7 @@ class ProductInventoryController extends Controller
         
     }
 
-    protected function ProductStock_RemoveSerialCode(Request $request){
+    protected function ProductStock_PullOutSerialCode(Request $request){
         $input = $request->all();
 
         // 0 = not removed default value
@@ -293,13 +265,12 @@ class ProductInventoryController extends Controller
             return Response::json( $return  );
         }
 
-        
     }
 
     protected function ProductStock_GetProduct(Request $request){
 
         $input = $request->all();
-        $productID = $input['productID'];
+        $productID = $input['product_id'];
 
         $product = ProductStock::where('product_id', $productID)->get();
 
@@ -307,6 +278,17 @@ class ProductInventoryController extends Controller
         $productStock = array_add($productStock, 'data' , $product);
         return Response::json( $productStock  );
 
+    }
+
+    protected function ProductStock_Remove(Request $request){
+        $input = $request->all();
+        $ID = $input['productstock_id'];
+
+        $stock = ProductStock::find($ID);
+        $stock->delete();
+
+        $return = array('result' => true, 'message' => 'Stock Product has been removed');
+        return Response::json( $return  );
     }
 
 }
