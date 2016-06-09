@@ -220,6 +220,7 @@ class ProductInventoryController extends Controller
             for($i = 0;$i < $quantity; $i++){
                 $productStock = ProductStock::where('product_id', $productID)->where('isAvailable', 1)->get()->first();
                 $productStock->isRemovedRemark = $productDeleteRemark;
+                $productStock->isAvailable      = 0;
                 $productStock->save();
                 $count++;
             }
@@ -253,6 +254,7 @@ class ProductInventoryController extends Controller
     
             $productStock = ProductStock::where('product_id', $productID)->where('serial_number', $serialnumber)->get()->first();
             $productStock->isRemovedRemark = $productDeleteRemark;
+            $productStock->isAvailable      = 0;
             $productStock->save();
             
             
