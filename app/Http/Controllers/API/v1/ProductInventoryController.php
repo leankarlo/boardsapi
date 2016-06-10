@@ -274,7 +274,7 @@ class ProductInventoryController extends Controller
         $input = $request->all();
         $productID = $input['product_id'];
 
-        $product = ProductStock::where('product_id', $productID)->get();
+        $product = ProductStock::where('product_id', $productID)->where('isAvailable', 1)->get();
 
         $productStock = array('result' => true);
         $productStock = array_add($productStock, 'data' , $product);
