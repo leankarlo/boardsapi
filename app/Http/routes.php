@@ -78,6 +78,8 @@ Route::get('/testconnection', 'API\v1\APIRequestController@TestConnection');
 
 			Route::get('/pullout_productquantity', 'API\v1\ProductInventoryController@ProductStock_PullOut');
 
+			Route::get('/delete', 'API\v1\ProductInventoryController@ProductStock_Remove');
+
 		});
 
 		Route::group(array('prefix'=>'type'), function(){
