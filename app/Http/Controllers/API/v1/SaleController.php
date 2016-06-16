@@ -47,7 +47,7 @@ class SaleController extends Controller
         // }
         // else{
             $end_date = date('Y-m-d',date(strtotime("+1 day", strtotime($to))));
-            $sales = Order::with('customer')->whereBetween('created_at', [$from, $end_date])->get();
+            $sales = Order::with('customer.user')->whereBetween('created_at', [$from, $end_date])->get();
         // }
 
         
