@@ -22,7 +22,7 @@ class Order extends Model
 
     public function customer()
     {
-        return $this->hasMany('App\Models\Customer', 'customer_id');
+        return $this->hasMany('App\Models\Customer', 'user_id', 'customer_id');
     }
 
     public function payment()

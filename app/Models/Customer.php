@@ -17,12 +17,12 @@ class Customer extends Model
 
     public function user()
     {
-    	return $this->hasOne('App\Models\user', 'id');
+    	return $this->hasOne('App\Models\user', 'id', 'user_id');
     }
 
     public function order()
     {
-        return $this->hasMany('App\Models\Order', 'customer_id');
+        return $this->belongsToMany('App\Models\Order', 'customer_id', 'user_id');
     }
 
 }

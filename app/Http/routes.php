@@ -140,14 +140,32 @@ Route::get('/testconnection', 'API\v1\APIRequestController@TestConnection');
 	});
 /* END order */
 
+/* Sales */
+	Route::group(array('prefix'=>'sales'), function(){
+
+		Route::get('/get', 'API\v1\SaleController@SalesInformation_Range');
+
+		Route::get('/details/get', 'API\v1\SaleController@OrderDetails_Get');
+
+	});
+/* END Sales */
+
 /* payment */
 	Route::group(array('prefix'=>'payment'), function(){
 
 		Route::get('/create', 'API\v1\CheckOutController@createPayment');
 
-		Route::post('/details/new', 'API\v1\CheckOutController@createPaymentDetails');
+		Route::group(array('prefix'=>'details'), function(){
 
-		Route::get('/ispayed_status/update', 'API\v1\CheckOutController@updatePaymentSatus');
+			Route::post('remove', 'API\v1\CheckOutController@createOrderDetails');
+
+			Route::post('/details/new', 'API\v1\CheckOutController@createPaymentDetails');
+
+			Route::get('get', 'API\v1\SaleController@PaymentDetails_Get');
+
+			Route::get('/remove/all', 'API\v1\SaleController@PaymentDetails_Delete');
+
+		});
 
 	});
 /* END payment */
