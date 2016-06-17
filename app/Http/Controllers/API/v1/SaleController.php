@@ -50,9 +50,12 @@ class SaleController extends Controller
             $sales = Order::with('customer.user')->whereBetween('created_at', [$from, $end_date])->get();
         // }
 
+        if(count($sales) == 0){
+            return Response::json(array('result' => false, 'message' => 'no sales yet on selected dates.' ) );
+        }else{
+            return Response::json(array('result' => true, 'data' => $sales, 'message' => 'succesfully loaded the sales.' ) );
+        }
         
-
-        return Response::json(array('result' => true, 'data' => $sales, 'message' => 'succesfully loaded the sales' ) );
 
         // return Response::json(array('result' => true, 'message' => 'succesfully loaded the sales' ) );
 
