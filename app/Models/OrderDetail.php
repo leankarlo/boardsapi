@@ -27,7 +27,7 @@ class OrderDetail extends Model
 
     public function productStocks()
     {
-        return $this->hasMany('App\Models\ProductStock', 'product_id');
+        return $this->hasMany('App\Models\ProductStock', 'id' ,'product_stock_id');
     }
 
     public function product()

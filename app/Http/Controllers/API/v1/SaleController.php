@@ -67,7 +67,7 @@ class SaleController extends Controller
 
         $orderID = $input['order_id'];
 
-        $saleDetails = OrderDetail::with('product')->where('order_id', $orderID)->get();
+        $saleDetails = OrderDetail::with('product','productStocks')->where('order_id', $orderID)->get();
 
         
 
