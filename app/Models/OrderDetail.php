@@ -25,9 +25,14 @@ class OrderDetail extends Model
     	return $this->hasMany('App\Models\Customer', 'customer_id');
     }
 
-    // public function productStocks()
-    // {
-    //     return $this->hasMany('App\Models\ProductStock', 'product_id');
-    // }
+    public function productStocks()
+    {
+        return $this->hasMany('App\Models\ProductStock', 'product_id');
+    }
+
+    public function product()
+    {
+        return $this->hasMany('App\Models\Product', 'id', 'product_id');
+    }
 
 }
