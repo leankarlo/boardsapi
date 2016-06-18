@@ -51,7 +51,7 @@ class SaleController extends Controller
         // }
 
         if(count($sales) == 0){
-            return Response::json(array('result' => false, 'message' => 'no sales yet on selected dates.' ) );
+            return Response::json(array('result' => true, 'data' => $sales, 'message' => 'no sales yet on selected dates.' ) );
         }else{
             return Response::json(array('result' => true, 'data' => $sales, 'message' => 'succesfully loaded the sales.' ) );
         }
