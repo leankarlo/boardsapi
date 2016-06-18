@@ -155,6 +155,8 @@ Route::get('/testconnection', 'API\v1\APIRequestController@TestConnection');
 
 		Route::get('/create', 'API\v1\CheckOutController@createPayment');
 
+		Route::get('/ispayed_status/update', 'API\v1\CheckOutController@updatePaymentSatus');
+
 		Route::group(array('prefix'=>'details'), function(){
 
 			Route::post('/remove', 'API\v1\CheckOutController@createOrderDetails');
