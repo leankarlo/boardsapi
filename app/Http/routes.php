@@ -157,11 +157,11 @@ Route::get('/testconnection', 'API\v1\APIRequestController@TestConnection');
 
 		Route::group(array('prefix'=>'details'), function(){
 
-			Route::post('remove', 'API\v1\CheckOutController@createOrderDetails');
+			Route::post('/remove', 'API\v1\CheckOutController@createOrderDetails');
 
-			Route::post('/details/new', 'API\v1\CheckOutController@createPaymentDetails');
+			Route::post('/new', 'API\v1\CheckOutController@createPaymentDetails');
 
-			Route::get('get', 'API\v1\SaleController@PaymentDetails_Get');
+			Route::get('/get', 'API\v1\SaleController@PaymentDetails_Get');
 
 			Route::get('/remove/all', 'API\v1\SaleController@PaymentDetails_Delete');
 
