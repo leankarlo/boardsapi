@@ -83,7 +83,7 @@ class SaleController extends Controller
 
         $orderID = $input['order_id'];
 
-        $saleDetails = PaymentDetail::where('order_id', $orderID)->get();
+        $saleDetails = PaymentDetail::with('paymentMethod')->where('order_id', $orderID)->get();
 
         
 

@@ -19,4 +19,9 @@ class PaymentDetail extends Model
         return $this->hasOne('App\Models\Payment', 'id');
     }
 
+    public function paymentMethod()
+    {
+        return $this->hasMany('App\Models\Banking', 'id', 'payment_type');
+    }
+
 }
